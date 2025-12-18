@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HospitalMS.DAL;
+using HospitalMS.UI.Forms.Dashboard;
 
 namespace HospitalMS.UI.Forms.Login
 {
@@ -51,16 +52,16 @@ namespace HospitalMS.UI.Forms.Login
             {
                 // ตรวจสอบ Login กับฐานข้อมูล
                 string query = @"SELECT u.UserID, u.Username, u.FullName, r.RoleName 
-                                FROM Users u 
-                                INNER JOIN Roles r ON u.RoleID = r.RoleID 
-                                WHERE u.Username = @Username 
-                                AND u.PasswordHash = @Password 
-                                AND u.IsActive = 1";
+                        FROM Users u 
+                        INNER JOIN Roles r ON u.RoleID = r.RoleID 
+                        WHERE u.Username = @Username 
+                        AND u.PasswordHash = @Password 
+                        AND u.IsActive = 1";
 
                 SqlParameter[] parameters = {
-                    new SqlParameter("@Username", txtUsername.Text.Trim()),
-                    new SqlParameter("@Password", txtPassword.Text) // ในโปรเจคจริงควร Hash รหัสผ่าน
-                };
+            new SqlParameter("@Username", txtUsername.Text.Trim()),
+            new SqlParameter("@Password", txtPassword.Text)
+        };
 
                 DataTable dt = DatabaseHelper.ExecuteDataTable(query, parameters);
 
@@ -68,16 +69,17 @@ namespace HospitalMS.UI.Forms.Login
                 {
                     // Login สำเร็จ
                     DataRow user = dt.Rows[0];
+                    string username = user["Username"].ToString();
                     string fullName = user["FullName"].ToString();
                     string roleName = user["RoleName"].ToString();
 
-                    MessageBox.Show($"Welcome, {fullName}!\nRole: {roleName}", "Login Successful",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // ซ่อน Login Form
+                    this.Hide();
 
-                    // TODO: เปิดหน้า Dashboard
-                    // this.Hide();
-                    // DashboardForm dashboard = new DashboardForm();
-                    // dashboard.Show();
+                    // เปิด Dashboard
+                    DashboardForm dashboard = new DashboardForm(username, fullName, roleName);
+                    dashboard.FormClosed += (s, args) => this.Close();
+                    dashboard.Show();
                 }
                 else
                 {
@@ -99,5 +101,6 @@ namespace HospitalMS.UI.Forms.Login
         {
             this.Close();
         }
+        
     }
 }
