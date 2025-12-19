@@ -130,6 +130,38 @@ namespace HospitalMS.DAL
         }
 
         /// <summary>
+        /// Execute Query และคืนค่าเป็น DataSet (สำหรับ multiple result sets)
+        /// </summary>
+        /// <param name="query">SQL Query</param>
+        /// <param name="parameters">Parameters (optional)</param>
+        /// <returns>DataSet ที่มีข้อมูลหลาย tables</returns>
+        public static DataSet ExecuteDataSet(string query, SqlParameter[] parameters = null)
+        {
+            try
+            {
+                using (SqlConnection conn = GetConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        if (parameters != null)
+                            cmd.Parameters.AddRange(parameters);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            DataSet ds = new DataSet();
+                            adapter.Fill(ds);
+                            return ds;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error executing data set: " + ex.Message);
+            }
+        }
+
+        /// <summary>
         /// สร้าง SqlParameter
         /// </summary>
         /// <param name="parameterName">ชื่อ Parameter (เช่น @Username)</param>
