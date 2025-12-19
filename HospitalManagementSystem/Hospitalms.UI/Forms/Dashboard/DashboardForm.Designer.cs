@@ -292,8 +292,9 @@
             this.Billing.Name = "Billing";
             this.Billing.Size = new System.Drawing.Size(150, 60);
             this.Billing.TabIndex = 4;
-            this.Billing.Text = "👥 Billing";
+            this.Billing.Text = "💰 Billing";
             this.Billing.UseVisualStyleBackColor = false;
+            this.Billing.Click += new System.EventHandler(this.btnBilling_Click);
             // 
             // Medicines
             // 

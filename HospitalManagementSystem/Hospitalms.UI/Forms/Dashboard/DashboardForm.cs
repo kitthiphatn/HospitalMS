@@ -145,7 +145,8 @@ namespace HospitalMS.UI.Forms.Dashboard
 
         private void btnBilling_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Billing - Coming Soon!", "Info");
+            Hospitalms.UI.Forms.Billing.InvoiceListForm invoiceForm = new Hospitalms.UI.Forms.Billing.InvoiceListForm();
+            invoiceForm.ShowDialog();
         }
 
         private void btnReports_Click(object sender, EventArgs e)

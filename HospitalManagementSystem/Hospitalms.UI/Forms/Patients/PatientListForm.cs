@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using HospitalMS.DAL;
+using Hospitalms.UI.Forms.MedicalRecords;
 
 namespace Hospitalms.UI.Forms.Patients
 {
@@ -171,6 +172,30 @@ namespace Hospitalms.UI.Forms.Patients
         private void dgvPatients_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // ว่างไว้
+        }
+
+        private void btnMedicalHistory_Click(object sender, EventArgs e)
+        {
+            if (dgvPatients.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a patient to view medical history.", "Information",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                int patientId = Convert.ToInt32(dgvPatients.SelectedRows[0].Cells["PatientID"].Value);
+                string patientName = dgvPatients.SelectedRows[0].Cells["FullName"].Value.ToString();
+
+                PatientMedicalHistoryForm form = new PatientMedicalHistoryForm(patientId, patientName);
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error opening medical history: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void PatientListForm_Load_1(object sender, EventArgs e)

@@ -37,6 +37,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnMedicalHistory = new System.Windows.Forms.Button();
             this.dgvPatients = new System.Windows.Forms.DataGridView();
             this.panelSearch.SuspendLayout();
             this.panelActions.SuspendLayout();
@@ -85,6 +86,7 @@
             // 
             // panelActions
             // 
+            this.panelActions.Controls.Add(this.btnMedicalHistory);
             this.panelActions.Controls.Add(this.btnRefresh);
             this.panelActions.Controls.Add(this.btnDelete);
             this.panelActions.Controls.Add(this.btnEdit);
@@ -143,6 +145,18 @@
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // btnMedicalHistory
+            // 
+            this.btnMedicalHistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btnMedicalHistory.ForeColor = System.Drawing.Color.White;
+            this.btnMedicalHistory.Location = new System.Drawing.Point(550, 12);
+            this.btnMedicalHistory.Name = "btnMedicalHistory";
+            this.btnMedicalHistory.Size = new System.Drawing.Size(150, 35);
+            this.btnMedicalHistory.TabIndex = 4;
+            this.btnMedicalHistory.Text = "📋 Medical History";
+            this.btnMedicalHistory.UseVisualStyleBackColor = false;
+            this.btnMedicalHistory.Click += new System.EventHandler(this.btnMedicalHistory_Click);
+            // 
             // dgvPatients
             // 
             this.dgvPatients.AllowUserToAddRows = false;
@@ -191,6 +205,7 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnMedicalHistory;
         private System.Windows.Forms.DataGridView dgvPatients;
     }
 }

@@ -46,6 +46,7 @@
             this.txtStockQuantity = new System.Windows.Forms.TextBox();
             this.txtReorderLevel = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // txtMedicineCode
@@ -66,7 +67,7 @@
             this.MedicineCode.TabIndex = 1;
             this.MedicineCode.Text = "Medicine Code:";
             // 
-            // Name
+            // lblName
             // 
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(47, 89);
@@ -267,5 +268,6 @@
         private System.Windows.Forms.TextBox txtStockQuantity;
         private System.Windows.Forms.TextBox txtReorderLevel;
         private System.Windows.Forms.TextBox txtDescription;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
