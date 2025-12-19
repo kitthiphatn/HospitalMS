@@ -1,6 +1,6 @@
 <Solution>
-  <Project Path="HospitalMS.BLL/HospitalMS.BLL.csproj" />
-  <Project Path="HospitalMS.Common/HospitalMS.Common.csproj" />
-  <Project Path="HospitalMS.DAL/HospitalMS.DAL.csproj" />
-  <Project Path="Hospitalms.UI/Hospitalms.UI.csproj" />
+  <Project Path="HospitalMS.BLL/HospitalMS.BLL.csproj" Id="0a100627-cf24-4d14-86be-785ee4f65f4a" />
+  <Project Path="HospitalMS.Common/HospitalMS.Common.csproj" Id="f36aea3c-d805-4ac4-bdb7-401044d08020" />
+  <Project Path="HospitalMS.DAL/HospitalMS.DAL.csproj" Id="3e3413f8-d126-40d2-8aee-2d2a5aa5fe04" />
+  <Project Path="Hospitalms.UI/Hospitalms.UI.csproj" Id="547ecc1b-3175-49e0-bcee-858d45a2c8b0" />
 </Solution>

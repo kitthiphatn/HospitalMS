@@ -227,22 +227,45 @@ Phone: {invoice["Phone"]}
             }
 
             // Summary
-            lblSummary.Text = $@"
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-                                          SubTotal:  ฿{Convert.ToDecimal(invoice["SubTotal"]):N2}
-                                          Tax (7%):  ฿{Convert.ToDecimal(invoice["TaxAmount"]):N2}
-                                          Discount:  ฿{Convert.ToDecimal(invoice["DiscountAmount"]):N2}
-                                          ─────────────────────────
-                                          TOTAL:     ฿{Convert.ToDecimal(invoice["TotalAmount"]):N2}
-                                          Paid:      ฿{Convert.ToDecimal(invoice["PaidAmount"]):N2}
-                                          ─────────────────────────
-                                          BALANCE:   ฿{Convert.ToDecimal(invoice["Balance"]):N2}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-                        Thank you for your business!
-";
+            StringBuilder summaryText = new StringBuilder();
+            summaryText.AppendLine("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            summaryText.AppendLine();
+            summaryText.AppendLine($"                                          SubTotal:  ฿{Convert.ToDecimal(invoice["SubTotal"]):N2}");
+            summaryText.AppendLine($"                                          Tax (7%):  ฿{Convert.ToDecimal(invoice["TaxAmount"]):N2}");
+            summaryText.AppendLine($"                                          Discount:  ฿{Convert.ToDecimal(invoice["DiscountAmount"]):N2}");
+            summaryText.AppendLine("                                          ─────────────────────────");
+            summaryText.AppendLine($"                                          TOTAL:     ฿{Convert.ToDecimal(invoice["TotalAmount"]):N2}");
+            summaryText.AppendLine($"                                          Paid:      ฿{Convert.ToDecimal(invoice["PaidAmount"]):N2}");
+            summaryText.AppendLine("                                          ─────────────────────────");
+            summaryText.AppendLine($"                                          BALANCE:   ฿{Convert.ToDecimal(invoice["Balance"]):N2}");
+            summaryText.AppendLine();
+            
+            // Add Payment History if exists
+            if (_paymentsData != null && _paymentsData.Rows.Count > 0)
+            {
+                summaryText.AppendLine("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                summaryText.AppendLine();
+                summaryText.AppendLine("PAYMENT HISTORY:");
+                summaryText.AppendLine();
+                
+                foreach (DataRow payment in _paymentsData.Rows)
+                {
+                    string paymentDate = Convert.ToDateTime(payment["PaymentDate"]).ToString("dd/MM/yyyy");
+                    string paymentMethod = payment["PaymentMethod"].ToString();
+                    string amount = Convert.ToDecimal(payment["Amount"]).ToString("N2");
+                    string reference = payment["ReferenceNumber"] != DBNull.Value ? payment["ReferenceNumber"].ToString() : "-";
+                    
+                    summaryText.AppendLine($"  • {paymentDate} - {paymentMethod,-15} ฿{amount,10}  (Ref: {reference})");
+                }
+                
+                summaryText.AppendLine();
+            }
+            
+            summaryText.AppendLine("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            summaryText.AppendLine();
+            summaryText.AppendLine("                        Thank you for your business!");
+            
+            lblSummary.Text = summaryText.ToString();
             lblSummary.Font = new Font("Consolas", 10);
         }
 
