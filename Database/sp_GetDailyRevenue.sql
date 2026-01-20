@@ -84,7 +84,7 @@ GO
 -- Test the stored procedure
 -- ============================================
 PRINT '';
-PRINT 'Testing sp_GetDailyRevenue with today''s date...';
+PRINT 'Testing sp_GetDailyRevenue with today date...';
 GO
 
 DECLARE @Today DATE = CAST(GETDATE() AS DATE);

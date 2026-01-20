@@ -173,7 +173,7 @@ namespace Hospitalms.UI.Forms.Billing
             using (Form inputForm = new Form())
             {
                 inputForm.Text = "Add Item";
-                inputForm.Size = new System.Drawing.Size(400, 300);
+                inputForm.Size = new System.Drawing.Size(400, 350);
                 inputForm.StartPosition = FormStartPosition.CenterParent;
                 inputForm.FormBorderStyle = FormBorderStyle.FixedDialog;
                 inputForm.MaximizeBox = false;
@@ -184,23 +184,84 @@ namespace Hospitalms.UI.Forms.Billing
                 cboType.Items.AddRange(new string[] { "Service", "Medicine", "Lab", "Other" });
                 cboType.SelectedIndex = 0;
 
-                Label lblDesc = new Label() { Left = 20, Top = 50, Text = "Description:", Width = 100 };
-                TextBox txtDesc = new TextBox() { Left = 130, Top = 48, Width = 200 };
+                // Medicine ComboBox (hidden by default)
+                Label lblMedicine = new Label() { Left = 20, Top = 50, Text = "Medicine:", Width = 100, Visible = false };
+                ComboBox cboMedicine = new ComboBox() { Left = 130, Top = 48, Width = 200, Visible = false, DropDownStyle = ComboBoxStyle.DropDownList };
 
-                Label lblQty = new Label() { Left = 20, Top = 80, Text = "Quantity:", Width = 100 };
-                NumericUpDown nudQty = new NumericUpDown() { Left = 130, Top = 78, Width = 200, Minimum = 1, Value = 1 };
+                Label lblDesc = new Label() { Left = 20, Top = 80, Text = "Description:", Width = 100 };
+                TextBox txtDesc = new TextBox() { Left = 130, Top = 78, Width = 200 };
 
-                Label lblPrice = new Label() { Left = 20, Top = 110, Text = "Unit Price:", Width = 100 };
-                TextBox txtPrice = new TextBox() { Left = 130, Top = 108, Width = 200, Text = "0.00" };
+                Label lblQty = new Label() { Left = 20, Top = 110, Text = "Quantity:", Width = 100 };
+                NumericUpDown nudQty = new NumericUpDown() { Left = 130, Top = 108, Width = 200, Minimum = 1, Value = 1 };
 
-                Label lblDiscount = new Label() { Left = 20, Top = 140, Text = "Discount %:", Width = 100 };
-                NumericUpDown nudDiscount = new NumericUpDown() { Left = 130, Top = 138, Width = 200, Minimum = 0, Maximum = 100, Value = 0, DecimalPlaces = 2 };
+                Label lblPrice = new Label() { Left = 20, Top = 140, Text = "Unit Price:", Width = 100 };
+                TextBox txtPrice = new TextBox() { Left = 130, Top = 138, Width = 200, Text = "0.00" };
 
-                Button btnOK = new Button() { Text = "Add", Left = 130, Width = 90, Top = 200, DialogResult = DialogResult.OK };
-                Button btnCancelInput = new Button() { Text = "Cancel", Left = 240, Width = 90, Top = 200, DialogResult = DialogResult.Cancel };
+                Label lblDiscount = new Label() { Left = 20, Top = 170, Text = "Discount %:", Width = 100 };
+                NumericUpDown nudDiscount = new NumericUpDown() { Left = 130, Top = 168, Width = 200, Minimum = 0, Maximum = 100, Value = 0, DecimalPlaces = 2 };
+
+                Button btnOK = new Button() { Text = "Add", Left = 130, Width = 90, Top = 230, DialogResult = DialogResult.OK };
+                Button btnCancelInput = new Button() { Text = "Cancel", Left = 240, Width = 90, Top = 230, DialogResult = DialogResult.Cancel };
+
+                // Load medicines for ComboBox
+                DataTable dtMedicines = null;
+                try
+                {
+                    string query = @"SELECT MedicineID, MedicineName, 
+                                   ISNULL(SellingPrice, UnitPrice) AS UnitPrice,
+                                   CostPrice
+                                   FROM Medicines 
+                                   WHERE IsActive = 1 AND StockQuantity > 0
+                                   ORDER BY MedicineName";
+                    dtMedicines = DatabaseHelper.ExecuteDataTable(query);
+                    cboMedicine.DisplayMember = "MedicineName";
+                    cboMedicine.ValueMember = "MedicineID";
+                    cboMedicine.DataSource = dtMedicines;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading medicines: " + ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                // Event handler for Type selection change
+                cboType.SelectedIndexChanged += (s, args) =>
+                {
+                    bool isMedicine = cboType.SelectedItem.ToString() == "Medicine";
+                    lblMedicine.Visible = isMedicine;
+                    cboMedicine.Visible = isMedicine;
+
+                    if (isMedicine && cboMedicine.SelectedIndex >= 0)
+                    {
+                        // Auto-fill from selected medicine
+                        DataRowView row = (DataRowView)cboMedicine.SelectedItem;
+                        txtDesc.Text = row["MedicineName"].ToString();
+                        txtPrice.Text = row["UnitPrice"].ToString();
+                        txtDesc.ReadOnly = true;
+                        txtPrice.ReadOnly = true;
+                    }
+                    else
+                    {
+                        txtDesc.ReadOnly = false;
+                        txtPrice.ReadOnly = false;
+                    }
+                };
+
+                // Event handler for Medicine selection change
+                cboMedicine.SelectedIndexChanged += (s, args) =>
+                {
+                    if (cboMedicine.SelectedIndex >= 0 && cboType.SelectedItem.ToString() == "Medicine")
+                    {
+                        DataRowView row = (DataRowView)cboMedicine.SelectedItem;
+                        txtDesc.Text = row["MedicineName"].ToString();
+                        txtPrice.Text = row["UnitPrice"].ToString();
+                    }
+                };
 
                 inputForm.Controls.Add(lblType);
                 inputForm.Controls.Add(cboType);
+                inputForm.Controls.Add(lblMedicine);
+                inputForm.Controls.Add(cboMedicine);
                 inputForm.Controls.Add(lblDesc);
                 inputForm.Controls.Add(txtDesc);
                 inputForm.Controls.Add(lblQty);

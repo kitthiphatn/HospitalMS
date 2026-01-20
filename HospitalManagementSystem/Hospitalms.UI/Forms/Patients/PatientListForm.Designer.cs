@@ -180,8 +180,10 @@
             this.Controls.Add(this.dgvPatients);
             this.Controls.Add(this.panelActions);
             this.Controls.Add(this.panelSearch);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MinimizeBox = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+            this.MinimizeBox = true;
+            this.MaximizeBox = true;
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "PatientListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Patient Management";

@@ -97,6 +97,7 @@
             this.lblWelcome.Size = new System.Drawing.Size(192, 17);
             this.lblWelcome.TabIndex = 1;
             this.lblWelcome.Text = "Welcome, System Administrator";
+            this.lblWelcome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // btnLogout
             // 
@@ -108,6 +109,7 @@
             this.btnLogout.TabIndex = 2;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // panelStats
@@ -120,8 +122,10 @@
             this.panelStats.Controls.Add(this.lblStatsTitle);
             this.panelStats.Location = new System.Drawing.Point(20, 80);
             this.panelStats.Name = "panelStats";
+            this.panelStats.AutoScroll = true;
             this.panelStats.Size = new System.Drawing.Size(1160, 120);
             this.panelStats.TabIndex = 3;
+            this.panelStats.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // panelMedicinesStat
             // 
@@ -268,8 +272,10 @@
             this.panelMenu.Controls.Add(this.btnPatients);
             this.panelMenu.Location = new System.Drawing.Point(20, 220);
             this.panelMenu.Name = "panelMenu";
+            this.panelMenu.AutoScroll = true;
             this.panelMenu.Size = new System.Drawing.Size(1160, 150);
             this.panelMenu.TabIndex = 4;
+            this.panelMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // Reports
             // 
@@ -280,8 +286,9 @@
             this.Reports.Name = "Reports";
             this.Reports.Size = new System.Drawing.Size(150, 60);
             this.Reports.TabIndex = 5;
-            this.Reports.Text = "👥 Reports";
+            this.Reports.Text = "📊 Reports";
             this.Reports.UseVisualStyleBackColor = false;
+            this.Reports.Click += new System.EventHandler(this.btnDailyRevenue_Click);
             // 
             // Billing
             // 
@@ -358,6 +365,7 @@
             this.dgvTodayAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTodayAppointments.Size = new System.Drawing.Size(1160, 220);
             this.dgvTodayAppointments.TabIndex = 5;
+            this.dgvTodayAppointments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTodayAppointments.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTodayAppointments_CellContentClick);
             // 
             // DashboardForm
@@ -373,6 +381,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hospital Management System - Dashboard";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Load += new System.EventHandler(this.DashboardForm_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();

@@ -101,6 +101,7 @@
             this.grpPatientInfo.Name = "grpPatientInfo";
             this.grpPatientInfo.Size = new System.Drawing.Size(850, 100);
             this.grpPatientInfo.TabIndex = 1;
+            this.grpPatientInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.grpPatientInfo.TabStop = false;
             this.grpPatientInfo.Text = "Patient Information";
             // 
@@ -182,6 +183,7 @@
             this.grpItems.Name = "grpItems";
             this.grpItems.Size = new System.Drawing.Size(850, 300);
             this.grpItems.TabIndex = 2;
+            this.grpItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.grpItems.TabStop = false;
             this.grpItems.Text = "Invoice Items";
             // 
@@ -261,6 +263,7 @@
             this.panelSummary.Controls.Add(this.label5);
             this.panelSummary.Location = new System.Drawing.Point(600, 520);
             this.panelSummary.Name = "panelSummary";
+            this.panelSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panelSummary.Size = new System.Drawing.Size(270, 150);
             this.panelSummary.TabIndex = 3;
             // 
@@ -388,9 +391,10 @@
             this.Controls.Add(this.grpItems);
             this.Controls.Add(this.grpPatientInfo);
             this.Controls.Add(this.panelHeader);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+            this.MaximizeBox = true;
+            this.MinimizeBox = true;
+            this.MinimumSize = new System.Drawing.Size(900, 700);
             this.Name = "InvoiceFormDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Invoice Form";

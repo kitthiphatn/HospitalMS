@@ -159,8 +159,10 @@
             this.Controls.Add(this.dgvAppointments);
             this.Controls.Add(this.panelActions);
             this.Controls.Add(this.panelSearch);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+            this.MinimizeBox = true;
+            this.MaximizeBox = true;
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "AppointmentListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointment Management";

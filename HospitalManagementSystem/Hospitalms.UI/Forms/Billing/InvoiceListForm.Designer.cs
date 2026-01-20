@@ -219,6 +219,7 @@
             this.Controls.Add(this.dgvInvoices);
             this.Controls.Add(this.panelActions);
             this.Controls.Add(this.panelSearch);
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "InvoiceListForm";
             this.Text = "Invoice Management";
             this.Load += new System.EventHandler(this.InvoiceListForm_Load);

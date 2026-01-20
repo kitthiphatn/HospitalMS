@@ -6,7 +6,8 @@ using HospitalMS.DAL;
 using Hospitalms.UI.Forms.Patients;
 using Hospitalms.UI.Forms.Appointments;
 using Hospitalms.UI.Forms.Doctors;
-using Hospitalms.UI.Forms.Medicines;  // เพิ่มบรรทัดนี้
+using Hospitalms.UI.Forms.Medicines;
+using HospitalMS.UI.Forms.Reports;
 
 namespace HospitalMS.UI.Forms.Dashboard
 {
@@ -179,6 +180,12 @@ namespace HospitalMS.UI.Forms.Dashboard
         private void btnDoctors_Click(object sender, EventArgs e)
         {
             DoctorListForm form = new DoctorListForm();
+            form.ShowDialog();
+        }
+
+        private void btnDailyRevenue_Click(object sender, EventArgs e)
+        {
+            DailyRevenueReportForm form = new DailyRevenueReportForm();
             form.ShowDialog();
         }
     }
