@@ -200,10 +200,12 @@ Open `HospitalMS.UI/App.config` and verify the connection string:
 ## 📸 Screenshots
 
 ### Login Screen
-![Login Screen](screenshots/login.png)
+![Login Screen](<img width="383" height="293" alt="Screenshot 2026-01-20 112639" src="https://github.com/user-attachments/assets/e19f2c96-4f51-4928-847d-8bd03885845a" />
+)
 
 ### Dashboard (Coming Soon)
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](<img width="1180" height="691" alt="Screenshot 2026-01-20 112628" src="https://github.com/user-attachments/assets/1f5affa5-55bb-4f1d-9fe7-80948a82c10e" />
+)
 
 ---
 
